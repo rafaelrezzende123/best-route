@@ -1,0 +1,55 @@
+<div class="best-route-form">
+    <form  [formGroup]="form" (ngSubmit)="getBestRoute()"> 
+        <h2>Busca a melhor rota.</h2> 
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="origin">Origem</label>
+                        <input 
+                            formControlName="origin"
+                            id="origin" 
+                            type="text" 
+                            class="form-control" 
+                            maxlength="3"/>
+                        <div *ngIf="f['origin'].touched && f['origin'].invalid" class="alert alert-danger">
+                            <div *ngIf="f['origin'].errors && f['origin'].errors['required']">a origem é obrigatório.</div>
+                            <div *ngIf="f['origin'].errors && f['origin'].errors['minlength']">a origem deve ter 3 caracteres.</div>
+                            <div *ngIf="f['origin'].errors && f['origin'].errors['pattern']">Somente letras são permitidas.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="destination">Destino</label>
+                        <input 
+                            formControlName="destination"
+                            id="destination" 
+                            type="text" 
+                            class="form-control" 
+                            maxlength="3"/>
+                        <div *ngIf="f['destination'].touched && f['destination'].invalid" class="alert alert-danger">
+                            <div *ngIf="f['destination'].errors && f['destination'].errors['required']">a origem é obrigatório.</div>
+                            <div *ngIf="f['destination'].errors && f['destination'].errors['minlength']">a origem deve ter 3 caracteres.</div>
+                            <div *ngIf="f['destination'].errors && f['destination'].errors['pattern']">Somente letras são permitidas.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary" [disabled]="this.form.invalid" type="submit" >Buscar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="card-result" *ngFor="let busca of buscas">
+        <div class="card" *ngIf="busca.length > 0">
+            <div class="card-body">
+              {{busca}}
+            </div>
+        </div>
+    </div>
+
+</div>
